@@ -3,10 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import MapView from 'react-native-maps';
 import { SearchBar } from 'react-native-elements';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import { connect } from "react-redux";
 
 const DEFAULT_COORD = { lat: 48.859268, lng: 2.347060 }
 
-export default class SearchScreen extends Component {
+class SearchScreen extends Component {
     state = { search: "" }
 
     updateSearch = search => {
@@ -52,3 +53,11 @@ const styles = StyleSheet.create({
         flex: 1
     }
 });
+
+const mapStateToProps = (store) => {
+    return {
+        currentWeather: store.weather.data
+    }
+}
+
+export default connect(mapStateToProps, undefined)(SearchScreen)
